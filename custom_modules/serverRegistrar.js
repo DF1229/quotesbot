@@ -49,7 +49,7 @@ module.exports = {
      * @returns {Boolean} True on success, throws an error on failure.
      */
     add(guild) {
-        fs.mkdirSync(`server/${guild.id}`);
+        fs.mkdirSync(`servers/${guild.id}`);
 
         let settings = new Object();
         settings.name = guild.name;
@@ -60,7 +60,7 @@ module.exports = {
 
         let quotes = new Object();
         quotes.guildID = guild.id;
-        temp2.quotes = [];
+        quotes.quotes = [];
         let quotesStr = JSON.stringify(quotes);
 
         fs.writeFileSync(`servers/${guild.id}/settings.json`, settingsStr, 'utf8', (err) => {
