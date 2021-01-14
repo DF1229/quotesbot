@@ -27,7 +27,7 @@ client.on('ready', () => {
     console.clear();
     Logger(client.user.tag, `logged in and ready to receive commands`);
 
-    var serverStats = serverRegistrar.run(client);
+    var serverStats = serverRegistrar.boot(client);
     Logger(client.user.tag, `${serverStats.newServers} server(s) registered, ${serverStats.oldServers} existing server(s) found.`);
 
     serverIDcache = fs.readdirSync('servers');
@@ -89,6 +89,24 @@ client.on('message', msg => {
         }
     } else {
         // room for special message handling
+    }
+});
+
+client.on('guildCreate', guild => {
+    Logger(client.user.tag, `joined a new guild: ${guild.name}`);
+    if (serverRegistrar.add(guild)) {
+        return Logger(client.user.tag, `registered server in /servers/${guild.id}.`);
+    } else {
+        return Logger(client.user.tag, `failed registering server ${guild.id}!`);
+    }
+});
+
+client.on('guildDelete', guild => {
+    Logger(client.user.tag, `left guild: ${guild.name}`);
+    if (serverRegistrar.remove(guild)) {
+        return Logger(client.user.tag, `successfully removed all files for guild ${guild.id}`);
+    } else {
+        return Logger(client.user.tag, `failed to remove files related to guild ${guild.id}!`);
     }
 });
 
