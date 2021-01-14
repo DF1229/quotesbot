@@ -25,10 +25,10 @@ for (const file of commandFiles) {
 // client.on
 client.on('ready', () => {
     console.clear();
-    Logger.log(client.user.tag, `logged in and ready to receive commands`);
+    Logger(client.user.tag, `logged in and ready to receive commands`);
 
     var serverStats = serverRegistrar.run(client);
-    Logger.log(client.user.tag, `${serverStats.newServers} server(s) registered, ${serverStats.oldServers} existing server(s) found.`);
+    Logger(client.user.tag, `${serverStats.newServers} server(s) registered, ${serverStats.oldServers} existing server(s) found.`);
 
     serverIDcache = fs.readdirSync('servers');
 });
@@ -46,7 +46,7 @@ client.on('message', msg => {
     if (guildConfig.quotes && msg.channel.id == quotesChannelID) {
         // check if message is a quote, delete if not
         if (!msg.content.startsWith('"')) {
-            Logger.log(msg.author.tag, `posted a non-quote message in a designated quotes channel`);
+            Logger(msg.author.tag, `posted a non-quote message in a designated quotes channel`);
             return msg.delete();
         }
         // send to quote handler
@@ -58,7 +58,7 @@ client.on('message', msg => {
 
         // check if command is registered, and make it a variable if so
         if (!client.commands.has(commandName)) {
-            Logger.log(msg.author.tag, `used the bot's prefix, but didn't specify an active command`);
+            Logger(msg.author.tag, `used the bot's prefix, but didn't specify an active command`);
             return msg.channel.send(`❌ Oops, I can't seem to find the command you're looking for!`);
         }
         const command = client.commands.get(commandName);
@@ -69,22 +69,22 @@ client.on('message', msg => {
             if (command.usage) {
                 reply += `\nThe proper usage would be: \`${prefix}${command.name} ${command.usage}\``
             }
-            Logger.log(msg.author.tag, `attempted to run ${commandName}, but didn't follow proper usage`);
+            Logger(msg.author.tag, `attempted to run ${commandName}, but didn't follow proper usage`);
             return msg.channel.send(reply);
         }
 
         // check if command is guild-only
         if (command.guildOnly && msg.channel.type === 'dm') {
-            Logger.log(msg.author.tag, `attempted to run a GuildOnly command in DM`);
+            Logger(msg.author.tag, `attempted to run a GuildOnly command in DM`);
             return msg.channel.send('❌ This command doesn\'t work in DM\'s!');
         }
 
         // attempt to execute command, and catch any errors
         try {
-            Logger.log(msg.author.tag, `ran command: ${commandName}`);
+            Logger(msg.author.tag, `ran command: ${commandName}`);
             command.execute(msg, args, guildConfig);
         } catch (error) {
-            Logger.log(msg.author.tag, error);
+            Logger(msg.author.tag, error);
             return msg.channel.send('Oops, we did a fucky wucky!');
         }
     } else {

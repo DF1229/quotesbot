@@ -11,7 +11,7 @@ module.exports = {
     execute(msg, args, guildSettings) {
         // check permission level (MANAGE_GUILD)
         if (!superusers.includes(msg.author.id)) {
-            Logger.log(msg.author.tag, `was denied acces to the ${this.name} command`);
+            Logger(msg.author.tag, `was denied acces to the ${this.name} command`);
             return msg.channel.send(`❌ Access denied ${msg.author.tag}, this command can only be executed by the bot's developer!`);
         }
 
