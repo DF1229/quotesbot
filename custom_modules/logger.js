@@ -1,5 +1,5 @@
 const fs = require('fs');
-module.exports = function log(authorTag, logMsg) {
+module.exports = function log(authorTag, description) {
     const date = new Date();
     const UTCstring = date.toISOString().substr(0, 10);
     const timeString = date.toISOString().substr(11, 8);
