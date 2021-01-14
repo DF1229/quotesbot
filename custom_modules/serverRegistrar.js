@@ -16,6 +16,7 @@ module.exports = {
                 temp.name = guild.name;
                 temp.id = guild.id;
                 temp.prefix = defaultPrefix;
+                temp.quotes = false;
                 let tempStr = JSON.stringify(temp);
 
                 let temp2 = new Object();

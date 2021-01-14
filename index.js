@@ -43,7 +43,7 @@ client.on('message', msg => {
 
     const prefix = guildConfig.prefix || defaultPrefix;
 
-    if (msg.channel.id == quotesChannelID) {
+    if (guildConfig.quotes && msg.channel.id == quotesChannelID) {
         // check if message is a quote, delete if not
         if (!msg.content.startsWith('"')) {
             Logger.log(msg.author.tag, `posted a non-quote message in a designated quotes channel`);
