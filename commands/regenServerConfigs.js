@@ -19,7 +19,7 @@ module.exports = {
         const serverIDs = fs.readdirSync('servers');
 
         for (const id of serverIDs) {
-            fs.readFileSync(`../servers/${id}/settings.json`, (err, data) => {
+            fs.readFileSync(`servers/${id}/settings.json`, (err, data) => {
                 if (err) throw err;
                 let oldSettings = JSON.parse(data);
                 
@@ -31,7 +31,7 @@ module.exports = {
 
                 // save new settings to server's settings file.
                 let newSettingsRaw = JSON.stringify(oldSettings);
-                fs.writeFileSync(`../server/${id}/settings.json`, newSettingsRaw, 'utf8', (err) => {
+                fs.writeFileSync(`server/${id}/settings.json`, newSettingsRaw, 'utf8', (err) => {
                     if (err) throw err;
                 });
             });
