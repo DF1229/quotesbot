@@ -4,8 +4,8 @@ const Discord = require('discord.js');
 const fs = require('fs');
 
 module.exports = {
-    name: 'regenServerConfigs',
-    description: 'Disable the quote tracking feature, the channel used for quotes will be saved until it is changed',
+    name: 'regenserverconfigs',
+    description: 'DEV-ONLY: insert new features into existing server configs',
     args: false,
     guildOnly: true,
     execute(msg, args, guildSettings) {
