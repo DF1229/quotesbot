@@ -51,7 +51,7 @@ client.on('message', msg => {
         }
         // send to quote handler
         quoteHandler.run(msg);
-    } else if (msg.content.startsWith(prefix) { // Command handling
+    } else if (msg.content.startsWith(prefix)) { // Command handling
         // prefix & command seperation
         const args = msg.content.slice(prefix.length).trim().split(/ +/);
         const commandName = args.shift().toLowerCase();
