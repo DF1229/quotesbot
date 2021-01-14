@@ -16,7 +16,7 @@ module.exports = {
         }
 
         // regenerate the guild's settings, leaving any custom settings untouched
-        const serverIDs = fs.readdirSync('../servers');
+        const serverIDs = fs.readdirSync('servers');
 
         for (const id of serverIDs) {
             fs.readFileSync(`../servers/${id}/settings.json`, (err, data) => {
