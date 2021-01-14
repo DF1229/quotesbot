@@ -12,6 +12,7 @@ module.exports = {
         // add/overwrite quote channel id
         let newChannel = msg.mentions.channels.first();
         guildSettings.quotesChannel = newChannel;
+        guildSettings.quotes = true;
 
         // save new server config
         let newSettings = JSON.stringify(guildSettings);
