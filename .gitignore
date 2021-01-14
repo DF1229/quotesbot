@@ -1,5 +1,6 @@
-test.js
 /servers
-package.json
+/logs
 package-lock.json
+package.json
 config.json
+test.js
