@@ -1,3 +1,4 @@
+const Logger = require('../custom_modules/logger.js');
 const fs = require('fs');
 
 module.exports = {
@@ -35,6 +36,8 @@ module.exports = {
                 throw err;
             }
         });
-        msg.react('✅');
+
+        Logger(msg.author.tag, 'quote stored');
+        return msg.react('✅');
     }
 }
