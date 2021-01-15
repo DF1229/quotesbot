@@ -22,11 +22,11 @@ module.exports = {
         embed.addField(`Bot`, `${member.user.bot}`, true);
         if (member.user.locale) embed.addField(`User locale`, `${member.user.locale}`, true);
         if (member.nickname) embed.addField(`Nickname`, `${member.nickname}`, true);
+        embed.addField(`User ping`, `${member.user.client.ws.ping}ms`, true);
+        embed.addField(`Highest role`, `${member.roles.highest}`, true);
         embed.addField(`Joined at`, `${member.joinedAt}`, true);
         embed.addField(`Created at`, `${member.user.createdAt}`, true);
-        embed.addField(`User ping`, `${member.user.client.ws.ping}ms`, true);
         if (member.premiumSince) embed.addField(`Premium since`, `${member.premiumSince}`, true);
-        embed.addField(`Highest role`, `${member.roles.highest}`, true);
 
         return msg.channel.send(embed);
     }
