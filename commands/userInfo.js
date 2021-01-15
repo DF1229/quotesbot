@@ -25,7 +25,7 @@ module.exports = {
         embed.addField(`Joined at`, `${member.joinedAt}`, true);
         embed.addField(`Created at`, `${member.user.createdAt}`, true);
         embed.addField(`User ping`, `${member.user.client.ws.ping}ms`, true);
-        if (member.premiumSince) embed.addField(`Premium since`, `${member.premiumSince}`);
+        if (member.premiumSince) embed.addField(`Premium since`, `${member.premiumSince}`, true);
         embed.addField(`Highest role`, `${member.roles.highest}`, true);
 
         return msg.channel.send(embed);
