@@ -13,7 +13,7 @@ module.exports = {
 
         // save changes to settings.json
         const newSettings = JSON.stringify(guildSettings);
-        fs.writeFileSync(`../servers/${msg.guild.id}/settings.json`, newSettings, 'utf8', (err) => {
+        fs.writeFileSync(`servers/${msg.guild.id}/settings.json`, newSettings, 'utf8', (err) => {
             if (err) throw err;
         });
         
