@@ -16,6 +16,8 @@ module.exports = {
             embed.setTitle('All available commands');
 
             commands.each(command => {
+                if (command.permissionLevel && !msg.member.hasPermission(command.permissionLevel)) return;
+
                 const name = command.name;
                 const description = command.description;
 
