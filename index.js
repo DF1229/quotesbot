@@ -62,6 +62,11 @@ client.on('message', msg => {
             return msg.channel.send(`❌ Oops, I can't seem to find the command you're looking for!`);
         }*/
         const command = client.commands.get(commandName);
+
+        // check if the user has the correct permission level to run the command.
+        if (command.permissionLevel && !msg.member.hasPermission(command.permissionLevel)) {
+            return msg.channel.send(`❌ Oops, you dont have the required permission(s) to run that command, ${msg.author}: \`${command.permissionLevel}\``);
+        }
         
         // check if the command requires arguments, and correct the user's usage if needed
         if (command.args && !args.length) {
