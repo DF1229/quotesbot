@@ -39,16 +39,20 @@ client.on('message', msg => {
     if (msg.author.bot) return;
     const guildConfig = JSON.parse(fs.readFileSync(`servers/${msg.guild.id}/settings.json`, (err, data) => {if(err) throw err; return data;}));
     
+    // this is dumb but it fixes and issue where the quotesChannelID is undefined so ¯\_(ツ)_/¯
     if (!guildConfig.quotesChannel) quotesChannelID = 0;
     else quotesChannelID = guildConfig.quotesChannel.id;
 
+    // prefix variable, guild's specific, or bot's default if the guild settings can't be loaded 
     const prefix = guildConfig.prefix || defaultPrefix;
-    if (guildConfig.quotes && msg.channel.id == quotesChannelID) {
+
+    if (guildConfig.quotes && msg.channel.id == quotesChannelID) { // Quote handling
         // check if message is a quote, delete if not
         if (!msg.content.startsWith('"') && !msg.content.startsWith('“')) {
             Logger(msg.author.tag, `posted a non-quote message in a designated quotes channel`);
             return msg.delete();
         }
+
         // send to quote handler
         quoteHandler.run(msg);
     } else if (msg.content.startsWith(prefix)) { // Command handling
