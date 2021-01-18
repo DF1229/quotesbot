@@ -39,16 +39,20 @@ client.on('message', msg => {
     if (msg.author.bot) return;
     const guildConfig = JSON.parse(fs.readFileSync(`servers/${msg.guild.id}/settings.json`, (err, data) => {if(err) throw err; return data;}));
     
+    // this is dumb but it fixes and issue where the quotesChannelID is undefined so ¯\_(ツ)_/¯
     if (!guildConfig.quotesChannel) quotesChannelID = 0;
     else quotesChannelID = guildConfig.quotesChannel.id;
 
+    // prefix variable, guild's specific, or bot's default if the guild settings can't be loaded 
     const prefix = guildConfig.prefix || defaultPrefix;
-    if (guildConfig.quotes && msg.channel.id == quotesChannelID) {
+
+    if (guildConfig.quotes && msg.channel.id == quotesChannelID) { // Quote handling
         // check if message is a quote, delete if not
         if (!msg.content.startsWith('"') && !msg.content.startsWith('“')) {
             Logger(msg.author.tag, `posted a non-quote message in a designated quotes channel`);
             return msg.delete();
         }
+
         // send to quote handler
         quoteHandler.run(msg);
     } else if (msg.content.startsWith(prefix)) { // Command handling
@@ -57,11 +61,13 @@ client.on('message', msg => {
         const commandName = args.shift().toLowerCase();
 
         // check if command is registered, and make it a variable if so
-        if (!client.commands.has(commandName)) return; /*{
-            Logger(msg.author.tag, `used the bot's prefix, but didn't specify an active command`);
-            return msg.channel.send(`❌ Oops, I can't seem to find the command you're looking for!`);
-        }*/
+        if (!client.commands.has(commandName)) return;
         const command = client.commands.get(commandName);
+
+        // check if the user has the correct permission level to run the command.
+        if (command.permissionLevel && !msg.member.hasPermission(command.permissionLevel)) {
+            return msg.channel.send(`❌ Oops, you dont have the required permission(s) to run that command, ${msg.author}: \`${command.permissionLevel}\``);
+        }
         
         // check if the command requires arguments, and correct the user's usage if needed
         if (command.args && !args.length) {
@@ -113,5 +119,12 @@ client.on('guildDelete', guild => {
         return Logger(client.user.tag, `failed to remove files related to guild ${guild.id}!`);
     }
 });
+
+if (!fs.existsSync('logs')) {
+    fs.mkdirSync('logs');
+} 
+if (!fs.existsSync('servers')) {
+    fs.mkdirSync('servers');
+}
 
 client.login(token);

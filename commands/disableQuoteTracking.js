@@ -6,10 +6,8 @@ module.exports = {
     description: 'Disable the quote tracking feature, the channel used for quotes will be saved unless changed',
     args: false,
     guildOnly: true,
+    permissionLeveL: 'ADMINISTRATOR',
     execute(msg, args, guildSettings) {
-        // check permission level (MANAGE_GUILD)
-        if (!msg.member.hasPermission('MANAGE_GUILD')) return msg.channel.send(`❌ Oops, you don't have the right permissions to use that command! \`MANAGE_GUILD\``);
-
         // change setting
         guildSettings.quotes = false;
 

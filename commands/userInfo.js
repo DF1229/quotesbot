@@ -11,7 +11,7 @@ module.exports = {
 
         let embed = new Discord.MessageEmbed()
             .setTitle(`User info`)
-            .setColor('GOLD')
+            .setColor('GREEN')
             .setTimestamp()
             .setFooter(msg.client.user.tag, msg.client.user.displayAvatarURL({'dynamic': true}));
 

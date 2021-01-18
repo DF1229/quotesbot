@@ -6,14 +6,13 @@ module.exports = {
     description: 'View the bot\'s settings for this server',
     usage: '',
     args: false,
+    permissionLevel: 'VIEW_AUDIT_LOG',
     execute(msg, args, guildSettings) {
-        if (!msg.member.hasPermission('MANAGE_GUILD')) return msg.channel.send(`❌ Oops, you don't have the right permissions to use that command! \`MANAGE_GUILD\``);
-
         // respond to user's command
         let embed = new Discord.MessageEmbed()
             .setTitle('Current server settings')
             .addField('Bot prefix', guildSettings.prefix, true)
-            .setColor('GOLD')
+            .setColor('GREEN')
             .setTimestamp()
             .setThumbnail(msg.guild.iconURL());
             

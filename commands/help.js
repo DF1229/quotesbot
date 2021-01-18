@@ -8,7 +8,7 @@ module.exports = {
     execute(msg, args, guildSettings) {
         const { commands } = msg.client;
         let embed = new Discord.MessageEmbed()
-            .setColor("GOLD")
+            .setColor("GREEN")
             .setTimestamp()
             .setFooter(msg.client.user.tag, msg.client.user.avatarURL({'dynamic': true}));
 
@@ -16,6 +16,8 @@ module.exports = {
             embed.setTitle('All available commands');
 
             commands.each(command => {
+                if (command.permissionLevel && !msg.member.hasPermission(command.permissionLevel)) return;
+
                 const name = command.name;
                 const description = command.description;
 
