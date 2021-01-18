@@ -126,4 +126,5 @@ if (!fs.existsSync('logs')) {
 if (!fs.existsSync('servers')) {
     fs.mkdirSync('servers');
 }
+
 client.login(token);
