@@ -23,11 +23,9 @@ module.exports = {
 
         let members = 0;
         msg.guild.me.client.guilds.cache.forEach(guild => {
-            fs.writeFileSync('guilds.cache.txt', guild.memberCount, (err) => {if (err) throw err;});
             members += guild.memberCount;
         });
 
-        console.log(typeof members)
         embed.addField('Users', members, true);
         m.delete();
 
