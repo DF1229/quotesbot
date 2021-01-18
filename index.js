@@ -13,6 +13,7 @@ const Logger = require('./custom_modules/logger.js');
 // setup
 const client = new Discord.Client();
 client.commands = new Discord.Collection();
+client.deletedMessages = new Discord.Collection();
 let serverIDcache;
 
 // command registration
@@ -89,6 +90,10 @@ client.on('message', msg => {
     } else {
         // room for special message handling
     }
+});
+
+client.on('messageDelete', message => {
+    client.deletedMessages.set(message.channel.id, message);
 });
 
 client.on('guildCreate', guild => {
