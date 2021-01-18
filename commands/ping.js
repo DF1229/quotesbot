@@ -17,6 +17,9 @@ module.exports = {
         embed.addField('Ping to bot', `${m.createdTimestamp - msg.createdTimestamp}ms`, true);
         embed.addField('API Heartbeat', `${Math.round(msg.client.ws.ping)}ms`, true);
         embed.addField('Websocket status', `${msg.client.ws.status}`, true);
+        embed.addField('Uptime', `${Math.round(msg.guild.me.client.uptime/1000)}s`,true);
+        embed.addField('Guilds', msg.guild.me.client.guilds.cache.size, true);
+        embed.addField('Users', msg.guild.me.client.users.cache.size, true);
         m.delete();
 
         msg.channel.send(embed);
