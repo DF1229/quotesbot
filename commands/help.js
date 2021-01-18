@@ -4,7 +4,6 @@ const Discord = require('discord.js');
 module.exports = {
     name: 'help',
     description: 'A list of all of the bot\'s commands, or info about a specific command',
-    guildOnly: false,
     args: false,
     execute(msg, args, guildSettings) {
         const { commands } = msg.client;
@@ -20,9 +19,8 @@ module.exports = {
                 const name = command.name;
                 const description = command.description;
 
-                if (command.usage) {
-                    const usage = command.usage;
-                    embed.addField(name, usage, true);
+                if (!command.description) {
+                    embed.addField(name, command.usage, true);
                 } else {
                     embed.addField(name, description, true);
                 }

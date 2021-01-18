@@ -3,7 +3,7 @@ const fs = require('fs');
 
 module.exports = {
     name: 'disablequotetracking',
-    description: 'Disable the quote tracking feature, the channel used for quotes will be saved until it is changed',
+    description: 'Disable the quote tracking feature, the channel used for quotes will be saved unless changed',
     args: false,
     guildOnly: true,
     execute(msg, args, guildSettings) {
