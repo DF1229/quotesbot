@@ -42,10 +42,9 @@ client.on('message', msg => {
     else quotesChannelID = guildConfig.quotesChannel.id;
 
     const prefix = guildConfig.prefix || defaultPrefix;
-
     if (guildConfig.quotes && msg.channel.id == quotesChannelID) {
         // check if message is a quote, delete if not
-        if (!msg.content.startsWith('"')) {
+        if (!msg.content.startsWith('"') && !msg.content.startsWith('“')) {
             Logger(msg.author.tag, `posted a non-quote message in a designated quotes channel`);
             return msg.delete();
         }
@@ -57,10 +56,10 @@ client.on('message', msg => {
         const commandName = args.shift().toLowerCase();
 
         // check if command is registered, and make it a variable if so
-        if (!client.commands.has(commandName)) {
+        if (!client.commands.has(commandName)) return; /*{
             Logger(msg.author.tag, `used the bot's prefix, but didn't specify an active command`);
             return msg.channel.send(`❌ Oops, I can't seem to find the command you're looking for!`);
-        }
+        }*/
         const command = client.commands.get(commandName);
         
         // check if the command requires arguments, and correct the user's usage if needed
