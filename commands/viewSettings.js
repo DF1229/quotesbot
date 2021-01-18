@@ -13,7 +13,7 @@ module.exports = {
         let embed = new Discord.MessageEmbed()
             .setTitle('Current server settings')
             .addField('Bot prefix', guildSettings.prefix, true)
-            .setColor('GOLD')
+            .setColor('GREEN')
             .setTimestamp()
             .setThumbnail(msg.guild.iconURL());
             
