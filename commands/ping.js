@@ -23,10 +23,10 @@ module.exports = {
 
         let members;
         msg.guild.me.client.guilds.cache.forEach(guild => {
+            fs.writeFileSync('guilds.cache.txt', guild.memberCount, (err) => {if (err) throw err;});
             members += guild.memberCount;
         });
 
-        fs.writeFileSync('guilds.cache.txt', msg.guild.me.client.guilds.cache, (err) => {if (err) throw err;});
         embed.addField('Users', members, true);
         m.delete();
 
