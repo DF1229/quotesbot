@@ -1,5 +1,6 @@
 const Logger = require('../custom_modules/logger.js');
 const Discord = require('discord.js');
+const fs = require('fs');
 
 module.exports = {
     name: 'ping',
@@ -25,7 +26,7 @@ module.exports = {
             members += guild.memberCount;
         });
 
-        console.log(members);
+        fs.writeFileSync('guilds.cache.txt', msg.guild.me.client.guilds.cache, (err) => {if (err) throw err;});
         embed.addField('Users', members, true);
         m.delete();
 
