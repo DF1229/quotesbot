@@ -8,7 +8,7 @@ module.exports = {
     execute(msg, args, guildSettings) {
         const { commands } = msg.client;
         let embed = new Discord.MessageEmbed()
-            .setColor("GOLD")
+            .setColor("GREEN")
             .setTimestamp()
             .setFooter(msg.client.user.tag, msg.client.user.avatarURL({'dynamic': true}));
 
