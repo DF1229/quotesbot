@@ -10,6 +10,7 @@ module.exports = {
         if (!dMsg) return msg.channel.send(`❌ Couldn't find anything to snipe!`);
 
         let embed = new Discord.MessageEmbed()
+            .setColor('GOLD');
             .setAuthor(dMsg.author.tag, dMsg.author.avatarURL({ dynamic: true}))
             .setDescription(dMsg.content);
 
