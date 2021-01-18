@@ -25,6 +25,7 @@ module.exports = {
             members += guild.memberCount;
         });
 
+        console.log(members);
         embed.addField('Users', members, true);
         m.delete();
 
