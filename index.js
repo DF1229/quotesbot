@@ -61,10 +61,6 @@ client.on('message', msg => {
         const commandName = args.shift().toLowerCase();
 
         // check if command is registered, and make it a variable if so
-        if (!client.commands.has(commandName)) return; /*{
-            Logger(msg.author.tag, `used the bot's prefix, but didn't specify an active command`);
-            return msg.channel.send(`❌ Oops, I can't seem to find the command you're looking for!`);
-        }*/
         if (!client.commands.has(commandName)) return;
         const command = client.commands.get(commandName);
 
@@ -124,4 +120,10 @@ client.on('guildDelete', guild => {
     }
 });
 
+if (!fs.existsSync('logs')) {
+    fs.mkdirSync('logs');
+} 
+if (!fs.existsSync('servers')) {
+    fs.mkdirSync('servers');
+}
 client.login(token);
