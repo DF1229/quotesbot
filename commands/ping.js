@@ -20,12 +20,12 @@ module.exports = {
         embed.addField('Uptime', `${Math.round(msg.guild.me.client.uptime/1000)}s`,true);
         embed.addField('Guilds', msg.guild.me.client.guilds.cache.size, true);
 
-        /*let members;
+        let members;
         msg.guild.me.client.guilds.cache.forEach(guild => {
             members += guild.memberCount;
-        });*/
+        });
 
-        embed.addField('Users', msg.guild.me.client.users.cache.size, true);
+        embed.addField('Users', members, true);
         m.delete();
 
         msg.channel.send(embed);
