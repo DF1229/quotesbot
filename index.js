@@ -61,6 +61,7 @@ client.on('message', msg => {
             Logger(msg.author.tag, `used the bot's prefix, but didn't specify an active command`);
             return msg.channel.send(`❌ Oops, I can't seem to find the command you're looking for!`);
         }*/
+        if (!client.commands.has(commandName)) return;
         const command = client.commands.get(commandName);
 
         // check if the user has the correct permission level to run the command.
