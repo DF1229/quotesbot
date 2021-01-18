@@ -21,12 +21,13 @@ module.exports = {
         embed.addField('Uptime', `${Math.round(msg.guild.me.client.uptime/1000)}s`,true);
         embed.addField('Guilds', msg.guild.me.client.guilds.cache.size, true);
 
-        let members;
+        let members = 0;
         msg.guild.me.client.guilds.cache.forEach(guild => {
             fs.writeFileSync('guilds.cache.txt', guild.memberCount, (err) => {if (err) throw err;});
             members += guild.memberCount;
         });
 
+        console.log(typeof members)
         embed.addField('Users', members, true);
         m.delete();
 
