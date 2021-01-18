@@ -6,9 +6,8 @@ module.exports = {
     description: 'Set the bot\'s command prefix for this server',
     usage: '<prefix>',
     args: true,
+    permissionLevel: 'MANAGE_GUILD',
     execute(msg, args, guildSettings) {
-        if (!msg.member.hasPermission('MANAGE_GUILD')) return msg.channel.send(`❌ Oops, you don't have the right permissions to use that command! \`MANAGE_GUILD\``);
-
         // add/overwrite server prefix
         let newPrefix = args[0];
         guildSettings.prefix = newPrefix;

@@ -6,9 +6,8 @@ module.exports = {
     description: 'Set the channel to be used for registering quotes',
     usage: '<channel>',
     args: true,
+    permissionLevel: 'MANAGE_GUILD',
     execute(msg, args, guildSettings) {
-        if (!msg.member.hasPermission('MANAGE_GUILD')) return msg.channel.send(`❌ Oops, you don't have the right permissions to use that command! \`MANAGE_GUILD\``);
-
         // add/overwrite quote channel id
         let newChannel = msg.mentions.channels.first();
         guildSettings.quotesChannel = newChannel;
