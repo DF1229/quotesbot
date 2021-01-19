@@ -1,3 +1,4 @@
+const wsStatus = require('../utils/wsStatus.js');
 const Logger = require('../utils/logger.js');
 const Discord = require('discord.js');
 const fs = require('fs');
@@ -17,7 +18,7 @@ module.exports = {
 
         embed.addField('Ping to bot', `${m.createdTimestamp - msg.createdTimestamp}ms`, true);
         embed.addField('API Heartbeat', `${Math.round(msg.client.ws.ping)}ms`, true);
-        embed.addField('Websocket status', `${msg.client.ws.status}`, true);
+        embed.addField('Websocket status', wsStatus[msg.client.ws.status], true);
 
         let sUptime = Math.round(msg.guild.me.client.uptime/1000);
         var fUptime = calcUptime(sUptime);
