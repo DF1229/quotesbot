@@ -18,7 +18,11 @@ module.exports = {
         embed.addField('Ping to bot', `${m.createdTimestamp - msg.createdTimestamp}ms`, true);
         embed.addField('API Heartbeat', `${Math.round(msg.client.ws.ping)}ms`, true);
         embed.addField('Websocket status', `${msg.client.ws.status}`, true);
-        embed.addField('Uptime', `${Math.round(msg.guild.me.client.uptime/1000)}s`,true);
+
+        let sUptime = Math.round(msg.guild.me.client.uptime/1000);
+        var fUptime = calcUptime(sUptime);
+
+        embed.addField('Uptime', `${fUptime}`,true);
         embed.addField('Guilds', msg.guild.me.client.guilds.cache.size, true);
 
         let members = 0;
@@ -30,5 +34,31 @@ module.exports = {
         m.delete();
 
         msg.channel.send(embed);
+    }
+}
+
+function calcUptime(sUptime) {
+    let d = 0, h = 0, m = 0;
+    
+    while (sUptime > 86400) {
+        d++;
+        sUptime -= 86400;
+    }
+    while (sUptime > 3600) {
+        h++;
+        sUptime -= 3600;
+    }
+    while (sUptime > 60) {
+        m++;
+        sUptime -= 60;
+    }
+    if (d>0) {
+        return `${d}d ${h}h ${m}m ${sUptime}s`;
+    } else if (h>0) {
+        return `${h}h ${m}m ${sUptime}s`;
+    } else if (m>0) {
+        return `${m}m ${sUptime}s`;
+    } else {
+        return `${sUptime}s`;
     }
 }
