@@ -1,7 +1,5 @@
 const wsStatus = require('../utils/wsStatus.js');
-const Logger = require('../utils/logger.js');
 const Discord = require('discord.js');
-const fs = require('fs');
 
 module.exports = {
     name: 'ping',
