@@ -6,9 +6,9 @@ const Discord = require('discord.js');
 
 // custom modules
 const { token, defaultPrefix } = require('./config.json');
-const quoteHandler = require('./custom_modules/quoteHandler.js');
-const serverRegistrar = require('./custom_modules/serverRegistrar.js');
-const Logger = require('./custom_modules/logger.js');
+const quoteHandler = require('./utils/quoteHandler.js.js');
+const serverRegistrar = require('./utils/serverRegistrar.js');
+const Logger = require('./utils/logger.js.js');
 
 // setup
 const client = new Discord.Client();

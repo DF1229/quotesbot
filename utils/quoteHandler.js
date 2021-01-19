@@ -1,4 +1,4 @@
-const Logger = require('../custom_modules/logger.js');
+const Logger = require('../utils/logger.js');
 const fs = require('fs');
 
 module.exports = {
