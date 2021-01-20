@@ -6,9 +6,9 @@ const Discord = require('discord.js');
 
 // custom modules
 const { token, defaultPrefix } = require('./config.json');
-const quoteHandler = require('./custom_modules/quoteHandler.js');
-const serverRegistrar = require('./custom_modules/serverRegistrar.js');
-const Logger = require('./custom_modules/logger.js');
+const quoteHandler = require('./utils/quoteHandler.js');
+const serverRegistrar = require('./utils/serverRegistrar.js');
+const Logger = require('./utils/logger.js');
 
 // setup
 const client = new Discord.Client();
@@ -24,7 +24,7 @@ for (const file of commandFiles) {
 }
 
 // client.on
-client.on('ready', () => {
+client.once('ready', () => {
     console.clear();
     Logger(client.user.tag, `logged in and ready to receive commands`);
 
@@ -98,8 +98,18 @@ client.on('message', msg => {
     }
 });
 
-client.on('messageDelete', message => {
-    client.deletedMessages.set(message.channel.id, message);
+client.on('messageDelete', msg => {
+    if (msg.channel.type == 'dm') return;
+    client.deletedMessages.clear();
+    client.deletedMessages.set(msg.channel.id, msg);
+    return Logger(client.user.tag, `deleted message stored for sniping.`);
+});
+
+client.on('messageUpdate', (oldMsg, newMsg) => {
+    if (oldMsg.channel.type == 'dm') return;
+    client.deletedMessages.clear();
+    client.deletedMessages.set(oldMsg.channel.id, oldMsg);
+    return Logger(client.user.tag, `edited message stored for sniping.`);
 });
 
 client.on('guildCreate', guild => {
