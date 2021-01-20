@@ -6,8 +6,6 @@ module.exports = {
     guildOnly: true,
     args: false,
     execute(msg) {
-        console.log(msg.guild.me.client.deletedMessages);
-        
         if (msg.guild.me.client.deletedMessages.size == 0) return msg.channel.send(
             new Discord.MessageEmbed()
             .setColor('RED')
