@@ -6,6 +6,13 @@ module.exports = {
     guildOnly: true,
     args: false,
     execute(msg) {
+        console.log(msg.guild.me.client.deletedMessages);
+        
+        if (msg.guild.me.client.deletedMessages.size == 0) return msg.channel.send(
+            new Discord.MessageEmbed()
+            .setColor('RED')
+            .setDescription('❌ Nothing to snipe!'));
+
         const dMsg = msg.guild.me.client.deletedMessages.get(msg.channel.id);
         if (!dMsg) return msg.channel.send(`❌ Couldn't find anything to snipe!`);
 

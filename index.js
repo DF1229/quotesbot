@@ -99,6 +99,7 @@ client.on('message', msg => {
 });
 
 client.on('messageDelete', msg => {
+    if (msg.author.bot) return;
     if (msg.channel.type == 'dm') return;
     client.deletedMessages.clear();
     client.deletedMessages.set(msg.channel.id, msg);
@@ -106,6 +107,7 @@ client.on('messageDelete', msg => {
 });
 
 client.on('messageUpdate', (oldMsg, newMsg) => {
+    if (oldMsg.author.bot) return;
     if (oldMsg.channel.type == 'dm') return;
     client.deletedMessages.clear();
     client.deletedMessages.set(oldMsg.channel.id, oldMsg);
