@@ -103,7 +103,6 @@ client.on('messageDelete', msg => {
     if (msg.channel.type == 'dm') return;
     client.deletedMessages.clear();
     client.deletedMessages.set(msg.channel.id, msg);
-    return Logger(client.user.tag, `deleted message stored for sniping.`);
 });
 
 client.on('messageUpdate', (oldMsg, newMsg) => {
@@ -111,7 +110,6 @@ client.on('messageUpdate', (oldMsg, newMsg) => {
     if (oldMsg.channel.type == 'dm') return;
     client.deletedMessages.clear();
     client.deletedMessages.set(oldMsg.channel.id, oldMsg);
-    return Logger(client.user.tag, `edited message stored for sniping.`);
 });
 
 client.on('guildCreate', guild => {
