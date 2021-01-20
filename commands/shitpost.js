@@ -3,7 +3,7 @@ const fs = require('fs');
 
 module.exports = {
     name: 'shitpost',
-    description: 'Get a random shitpost the pile',
+    description: 'Get a random shitpost from the pile',
     async execute(msg) {
         let embed = new Discord.MessageEmbed()
         
