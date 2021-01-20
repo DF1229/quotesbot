@@ -11,7 +11,9 @@ module.exports = {
         let quoteRaw = info[0];
         let authorRaw = info[1];
 
-        let quoteTemp = quoteRaw.split('"');
+        let quoteTemp = "";
+        if (quoteRaw.includes('"')) quoteTemp = quoteRaw.split('"');
+        else quoteTemp = quoteRaw.split('“');
         let authorTemp = authorRaw.split(' ');
 
         const quote = quoteTemp[1];
