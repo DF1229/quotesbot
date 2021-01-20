@@ -24,7 +24,7 @@ for (const file of commandFiles) {
 }
 
 // client.on
-client.on('ready', () => {
+client.once('ready', () => {
     console.clear();
     Logger(client.user.tag, `logged in and ready to receive commands`);
 
@@ -98,8 +98,18 @@ client.on('message', msg => {
     }
 });
 
-client.on('messageDelete', message => {
-    client.deletedMessages.set(message.channel.id, message);
+client.on('messageDelete', msg => {
+    if (msg.channel.type == 'dm') return;
+    client.deletedMessages.clear();
+    client.deletedMessages.set(msg.channel.id, msg);
+    return Logger(client.user.tag, `Deleted message stored for sniping.`);
+});
+
+client.on('messageEdit', (oldMsg, newMsg) => {
+    if (msg.channel.type == 'dm') return;
+    client.deletedMessages.clear();
+    client.deletedMessages.set(msg.channel.id, msg);
+    return Logger(client.user.tag, `Edited message stored for sniping.`);
 });
 
 client.on('guildCreate', guild => {
