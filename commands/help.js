@@ -5,6 +5,7 @@ module.exports = {
     name: 'help',
     description: 'A list of all of the bot\'s commands, or info about a specific command',
     args: false,
+    usage: '[command]',
     execute(msg, args, guildSettings) {
         const { commands } = msg.client;
         let embed = new Discord.MessageEmbed()
@@ -34,10 +35,10 @@ module.exports = {
             if (!command) {
                 return msg.channel.send(`❌ I couldn't find that command, ${msg.author}!`);
             }
-            embed.setTitle(name);
+            embed.setTitle(command.name);
             embed.setDescription(command.description);
 
-            if (command.usage) embed.addField('Usage'. command.usage, true);
+            if (command.usage) embed.addField('Usage', command.usage, true);
         } else {
             msg.channel.send(`❌ You provided too many arguments, ${msg.author}!`);
         }
