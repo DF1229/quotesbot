@@ -87,7 +87,7 @@ client.on('message', msg => {
 
         // attempt to execute command, and catch any errors
         try {
-            Logger(msg.author.tag, `ran command: ${commandName}`);
+            Logger(msg.author.tag, `ran command: ${msg.content}`);
             command.execute(msg, args, guildConfig);
         } catch (error) {
             Logger(msg.author.tag, error);
