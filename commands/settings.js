@@ -2,7 +2,7 @@ const Discord = require('discord.js');
 const fs = require('fs');
 
 module.exports = {
-    name: 'viewsettings',
+    name: 'settings',
     description: 'View the bot\'s settings for this server',
     usage: '',
     args: false,
